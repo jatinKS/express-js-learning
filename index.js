@@ -1,7 +1,11 @@
 const express = require('express');
 const path = require('path');
+const members = require('./Members')
 
 app = express();
+
+//Gets All Members
+app.get('/api/members', (req,res) => res.json(members));
 
 //Set static folder
 app.use(express.static(path.join(__dirname,'public')));
