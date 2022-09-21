@@ -1,16 +1,45 @@
-const express = require('express');
-const path = require('path')
-const members = require('./Members');
-const logger = require('./middleware/logger');
+const express = require("express");
+const app = express();
+var format = require("date-format");
 
-app = express();
+var date;
 
-app.use(logger);
-//Gets All Members
-app.get('/api/members', (req,res) => res.json(members));
+app.get("/", (req, resp) => {
+  resp.send("<h1>hello this is swati how are you?</h1>");
+});
+//-------------- Instragram ------------
 
-//Set static folder
-app.use(express.static(path.join(__dirname,'public')));
+app.get("/api/instagram", (req, resp) => {
+  const instaSocial = {
+    id: "swatistiwati13",
+    follower: 401,
+    following: 167,
+    date: format.asString("hh:mm:ss", new Date()),
+  };
 
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`Server started on port ${PORT}`));
+  resp.status(200).json(instaSocial);
+});
+//------------- Twitter ---------------
+app.get("/api/twitter", (req, resp) => {
+  const twitterSocial = {
+    id: "ThisIsSwati",
+    follower: 69,
+    following: 95,
+    date: new Date(),
+  };
+
+  resp.status(200).json(twitterSocial);
+});
+// ------------- LinkedIN ----------
+app.get("/api/linkedin", (req, resp) => {
+  const linkedinSocial = {
+    id: "swatistiwati13",
+    follower: 496,
+    following: 495,
+    date: new Date(),
+  };
+
+  resp.status(200).json(linkedinSocial);
+});
+
+app.listen(5000);
